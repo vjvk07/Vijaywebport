@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vijayakumar S — Frontend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1A2332;
+    --paper: #F7F5F0;
+    --pass: #3DDC97;
+    --amber: #E8A23D;
+    --muted: #5C6B7A;
+    --white: #FFFFFF;
+    --line: rgba(26,35,50,0.12);
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(247,245,240,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--pass); }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.2s ease;
+    position: relative;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible { color: var(--ink); }
+  .nav-links a:focus-visible { outline: 2px solid var(--pass); outline-offset: 4px; border-radius: 2px; }
+
+  /* ===== HERO / TERMINAL ===== */
+  header.hero {
+    padding: 90px 0 70px;
+    border-bottom: 1px solid var(--line);
+  }
+  .terminal {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px -20px rgba(26,35,50,0.4);
+  }
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    background: rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .dot.r { background: #E8746A; }
+  .dot.y { background: var(--amber); }
+  .dot.g { background: var(--pass); }
+  .terminal-title {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-left: 8px;
+  }
+  .terminal-body {
+    padding: 36px 36px 40px;
+    font-family: var(--mono);
+  }
+  .term-line {
+    font-size: 0.85rem;
+    color: var(--pass);
+    margin-bottom: 18px;
+    opacity: 0.85;
+  }
+  .term-line .prompt { color: var(--amber); }
+  h1.name {
+    font-family: var(--display);
+    font-size: clamp(2.6rem, 7vw, 4.6rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+    color: var(--white);
+  }
+  .role-line {
+    font-size: clamp(1rem, 2.4vw, 1.35rem);
+    color: var(--paper);
+    margin-bottom: 28px;
+    font-family: var(--body);
+    font-weight: 500;
+  }
+  .role-line .accent { color: var(--pass); }
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    padding: 6px 13px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 100px;
+    color: var(--paper);
+  }
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .btn {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:focus-visible { outline: 2px solid var(--pass); outline-offset: 3px; }
+  .btn-primary { background: var(--pass); color: var(--ink); }
+  .btn-ghost { background: transparent; color: var(--paper); border: 1px solid rgba(255,255,255,0.25); }
+
+  /* ===== SECTION HEADINGS ===== */
+  .section { padding: 70px 0; border-bottom: 1px solid var(--line); }
+  .section:last-of-type { border-bottom: none; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--pass);
+    background: rgba(61,220,151,0.1);
+    padding: 5px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  /* ===== SUMMARY ===== */
+  .summary p {
+    font-size: 1.05rem;
+    color: var(--ink);
+    max-width: 760px;
+  }
+  .summary .highlight {
+    color: var(--ink);
+    font-weight: 600;
+    border-bottom: 2px solid var(--pass);
+  }
+
+  /* ===== SKILLS / COVERAGE ===== */
+  .coverage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .cov-cell {
+    background: var(--paper);
+    padding: 24px 26px;
+  }
+  .cov-cell h3 {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cov-cell h3::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: var(--pass);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .cov-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .cov-list li {
+    font-size: 0.88rem;
+    padding: 5px 12px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--ink);
+  }
+
+  /* ===== EXPERIENCE ===== */
+  .job {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--white);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .job-head {
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .job-title-block h3 {
+    font-family: var(--display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .job-meta {
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+  .job-status {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    background: rgba(61,220,151,0.12);
+    color: #1f8a5e;
+    padding: 6px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .job-status.archived {
+    background: rgba(92,107,122,0.12);
+    color: var(--muted);
+  }
+  .job-body { padding: 22px 28px; }
+  .job-body ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .job-body li {
+    padding-left: 26px;
+    position: relative;
+    font-size: 0.96rem;
+    color: var(--ink);
+  }
+  .job-body li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 1px;
+    color: var(--pass);
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  .clients {
+    margin-top: 16px;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  /* ===== PROJECTS ===== */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .project-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--white);
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .project-card:hover {
+    border-color: var(--pass);
+    transform: translateY(-3px);
+  }
+  .project-card h3 {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .project-card p {
+    font-size: 0.92rem;
+    color: var(--muted);
+    flex-grow: 1;
+    margin-bottom: 16px;
+  }
+  .stack-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .stack-row span {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    padding: 4px 10px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    color: var(--muted);
+  }
+
+  /* ===== EDUCATION + CERTS ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 24px;
+  }
+  .edu-item {
+    border-left: 2px solid var(--pass);
+    padding-left: 20px;
+    margin-bottom: 22px;
+  }
+  .edu-item:last-child { margin-bottom: 0; }
+  .edu-item h3 {
+    font-family: var(--display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .edu-meta {
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+  .cert-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .cert-list li {
+    padding: 14px 18px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .cert-list .badge {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    background: rgba(232,162,61,0.15);
+    color: #b9791f;
+    padding: 3px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    margin-top: 1px;
+  }
+
+  /* ===== CONTACT / FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 60px 0 36px;
+  }
+  .footer-inner {
+    text-align: center;
+  }
+  footer h2 {
+    font-family: var(--display);
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    margin-bottom: 16px;
+    color: var(--white);
+  }
+  footer p.sub {
+    color: var(--muted);
+    margin-bottom: 32px;
+    font-size: 1rem;
+  }
+  .contact-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .contact-pill {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    padding: 11px 22px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 100px;
+    text-decoration: none;
+    color: var(--paper);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .contact-pill:hover { border-color: var(--pass); color: var(--pass); }
+  .contact-pill:focus-visible { outline: 2px solid var(--pass); outline-offset: 3px; }
+  footer .meta {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 24px;
+  }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 0 20px; }
+    .nav-inner { padding: 16px 20px; }
+    .nav-links { gap: 16px; font-size: 0.75rem; }
+    .terminal-body { padding: 26px 22px 30px; }
+    .section { padding: 50px 0; }
+    .two-col { grid-template-columns: 1fr; }
+    .job-head { flex-direction: column; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">vijayakumar<span>.</span>dev</div>
+    <div class="nav-links">
+      <a href="#experience">experience</a>
+      <a href="#projects">projects</a>
+      <a href="#skills">skills</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot r"></span>
+        <span class="dot y"></span>
+        <span class="dot g"></span>
+        <span class="terminal-title">vijayakumar — profile.test.js</span>
+      </div>
+      <div class="terminal-body">
+        <div class="term-line"><span class="prompt">$</span> npm run introduce</div>
+        <h1 class="name">Vijayakumar S</h1>
+        <p class="role-line">Frontend Developer with a <span class="accent">QA-tested</span> foundation — 1.8 yrs in Manual Testing & Automation, now building interfaces that pass on the first run.</p>
+        <div class="tag-row">
+          <span class="tag">JavaScript (ES6+)</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">HTML5 & CSS3</span>
+          <span class="tag">Selenium WebDriver</span>
+          <span class="tag">React.js</span>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="mailto:vijaykumarselvarasuvk@gmail.com">Get in touch</a>
+          <a class="btn btn-ghost" href="https://linkedin.com/in/vijayakumar-s079978238" target="_blank" rel="noopener">View LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section summary" id="about">
+    <div class="section-head">
+      <span class="section-tag">// about</span>
+      <h2 class="section-title">Professional Summary</h2>
+    </div>
+    <p>
+      Software professional with <span class="highlight">1.8+ years of hands-on experience</span> in Manual Testing and QA at Wipro HR Services, combined with strong practical frontend development skills in JavaScript, TypeScript, HTML5, CSS3, and Bootstrap gained through academic projects and a 5-month internship. Experienced in building responsive, cross-browser-compatible web interfaces and translating complex requirements into clean, reusable code components. Proficient in REST API integration, Agile Scrum collaboration with designers, PMs, and engineers, and CI/CD-aware development workflows — bringing a unique QA perspective to frontend engineering, ensuring high code quality, browser compatibility, and scalability from day one.
+    </p>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="section-head">
+      <span class="section-tag">// coverage</span>
+      <h2 class="section-title">Technical Skills</h2>
+    </div>
+    <div class="coverage-grid">
+      <div class="cov-cell">
+        <h3>Frontend Languages</h3>
+        <ul class="cov-list">
+          <li>JavaScript (ES6+)</li><li>TypeScript</li><li>HTML5</li><li>CSS3</li><li>jQuery</li>
+        </ul>
+      </div>
+      <div class="cov-cell">
+        <h3>Frameworks & UI</h3>
+        <ul class="cov-list">
+          <li>Bootstrap</li><li>Responsive Design</li><li>React.js</li><li>JSON</li><li>REST APIs</li>
+        </ul>
+      </div>
+      <div class="cov-cell">
+        <h3>Build & Version Control</h3>
+        <ul class="cov-list">
+          <li>Git</li><li>GitHub</li><li>Maven</li><li>Webpack</li><li>IntelliJ IDEA</li><li>VS Code</li>
+        </ul>
+      </div>
+      <div class="cov-cell">
+        <h3>CI/CD & Collaboration</h3>
+        <ul class="cov-list">
+          <li>CI/CD Pipelines</li><li>Agile Scrum</li><li>Jira</li><li>Code Reviews</li>
+        </ul>
+      </div>
+      <div class="cov-cell">
+        <h3>Testing & QA</h3>
+        <ul class="cov-list">
+          <li>Manual Functional Testing</li><li>STLC</li><li>Regression</li><li>Browser Compatibility</li><li>Selenium WebDriver</li><li>TestNG</li>
+        </ul>
+      </div>
+      <div class="cov-cell">
+        <h3>Backend & Databases</h3>
+        <ul class="cov-list">
+          <li>Java (OOP, Collections)</li><li>SQL</li><li>Python</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <div class="section-head">
+      <span class="section-tag">// experience</span>
+      <h2 class="section-title">Work Experience</h2>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div class="job-title-block">
+          <h3>Associate Analyst — Manual Testing & QA</h3>
+          <div class="job-meta">Wipro HR Services Pvt Ltd · Aug 2023 – Present (1.8 Yrs)</div>
+        </div>
+        <span class="job-status">RUNNING ●</span>
+      </div>
+      <div class="job-body">
+        <ul>
+          <li>Designed and executed end-to-end test cases covering Functional, Regression, GUI, System, and Browser Compatibility Testing — ensuring cross-browser UI consistency across Chrome, Firefox, Safari, and Edge.</li>
+          <li>Reviewed Functional Specification documents and front-end style guides throughout the SDLC/STLC lifecycle, validating that UI implementations met design and business requirements — simulating a code-review mindset.</li>
+          <li>Performed REST API and mainframe query testing using Bluezone and HRO Workbench to validate data flow across integrated systems — hands-on experience with request/response validation and data integrity checks.</li>
+          <li>Developed Java/JavaScript automation scripts using Selenium WebDriver and TestNG, applying OOP and modular, reusable component design — reducing manual testing effort by 40% across enterprise HR modules.</li>
+          <li>Collaborated across Agile Scrum sprint cycles with BAs, Developers, PMs, and Product Owners — translating complex requirements into well-structured test scenarios aligned with acceptance criteria.</li>
+          <li>Managed defect lifecycle and sprint test cycles in Jira; provided sprint-wise effort estimations; received the Illuminate Award for extraordinary performance on enterprise project deliveries.</li>
+        </ul>
+        <div class="clients">clients: Phillips 66 · AbbVie · Abbott Labs · United Airlines</div>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div class="job-title-block">
+          <h3>Frontend Developer Intern</h3>
+          <div class="job-meta">AIM High Realty (Learnix Tech) & Bluescope Technology · 5 Months (2022–2023)</div>
+        </div>
+        <span class="job-status archived">COMPLETED ✓</span>
+      </div>
+      <div class="job-body">
+        <ul>
+          <li>Built and deployed a responsive, multi-page educational web platform using JavaScript, HTML5, CSS3, and Bootstrap — ensured cross-browser compatibility and optimized performance and uptime via web hosting setup.</li>
+          <li>Developed a login/signup module with JavaScript form validations and responsive UX; collaborated with cross-functional teams to translate UI designs into functional interfaces.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="section-head">
+      <span class="section-tag">// projects</span>
+      <h2 class="section-title">Key Projects</h2>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3>Learnix Tech Educational Website</h3>
+        <p>A responsive, scalable multi-page platform with cross-browser compatibility, a clean modular HTML/CSS/JS structure, and optimized web hosting.</p>
+        <div class="stack-row">
+          <span>JavaScript</span><span>HTML5</span><span>CSS3</span><span>Bootstrap</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3>Java-Based E-Commerce Platform</h3>
+        <p>Full-stack application featuring a secure payment gateway, user authentication, and an SQL database with session handling.</p>
+        <div class="stack-row">
+          <span>Java</span><span>JavaScript</span><span>SQL</span><span>REST APIs</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3>Movie Recommendation System</h3>
+        <p>A Python/ML-based recommendation engine paired with a JavaScript web interface for browsing and discovering recommendations.</p>
+        <div class="stack-row">
+          <span>Python</span><span>JavaScript</span><span>HTML5</span><span>CSS3</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="education">
+    <div class="section-head">
+      <span class="section-tag">// background</span>
+      <h2 class="section-title">Education & Certifications</h2>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="edu-item">
+          <h3>B.E. Computer Science & Engineering</h3>
+          <div class="edu-meta">Coimbatore Institute of Engineering and Technology · 2019 – 2023 · CGPA 7.50</div>
+        </div>
+        <div class="edu-item">
+          <h3>Higher Secondary (HSC)</h3>
+          <div class="edu-meta">Sathya Saai Mat. Hr. Sec. School · 2017 – 2019 · 63.1%</div>
+        </div>
+      </div>
+      <ul class="cert-list">
+        <li><span class="badge">AWARD</span> Illuminate Award — Wipro HR Services, for extraordinary performance on enterprise QA project deliveries.</li>
+        <li><span class="badge">COURSE</span> Front-End Development Course — Smartknower Education Institution.</li>
+        <li><span class="badge">CERT</span> Programming: HTML, CSS, JavaScript, jQuery — Udemy Certification.</li>
+        <li><span class="badge">SELF-TAUGHT</span> Java Core Programming — via LeetCode and hands-on project development.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap footer-inner">
+    <h2>Let's build something reliable.</h2>
+    <p class="sub">Open to Frontend Developer roles — available now.</p>
+    <div class="contact-row">
+      <a class="contact-pill" href="mailto:vijaykumarselvarasuvk@gmail.com">vijaykumarselvarasuvk@gmail.com</a>
+      <a class="contact-pill" href="tel:+919361714353">+91 93617 14353</a>
+      <a class="contact-pill" href="https://linkedin.com/in/vijayakumar-s079978238" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="contact-pill" href="#">Chromepet, Chennai – 600044</a>
+    </div>
+    <div class="meta">© 2026 Vijayakumar S — Built with HTML, CSS & a QA mindset.</div>
+  </div>
+</footer>
+
+</body>
+</html>
